@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<menu-config xmlns="http://jmix.io/schema/flowui/menu">
+
+    <menu id="rt" title="msg://dev.smartdata.runteam/menu.addon">
+        <item view="rt_RunGroovy" title="msg://dev.smartdata.runteam.view.rungroovy/runGroovy.title"/>
+        <item view="rt_RunJpql" title="msg://dev.smartdata.runteam.view.runjpql/runJpql.title"/>
+    </menu>
+
+</menu-config>

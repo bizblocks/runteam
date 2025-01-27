@@ -1,0 +1,8 @@
+rootProject.name = 'RunTeam-addon'
+
+include 'runteam'
+include 'runteam-starter'
+
+rootProject.children.each { p1 ->
+    p1.buildFileName = "${p1.name}.gradle"
+}
