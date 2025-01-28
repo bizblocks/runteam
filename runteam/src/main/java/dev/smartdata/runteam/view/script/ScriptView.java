@@ -47,7 +47,7 @@ public class ScriptView extends StandardView {
     public void onRun(final ActionPerformedEvent event) {
         GroovyClassLoader loader = new GroovyClassLoader();
         Class viewClass = loader.parseClass(generateGroovyClass());
-        viewRegistryTools.registerView("ext-view", new ViewInfo("ext-view", viewClass.getName(), viewClass, generateDescriptor()));
+        viewRegistryTools.registerView("scriptable-view-generated", new ViewInfo("scriptable-view-generated", viewClass.getName(), viewClass, generateDescriptor()));
         dialogWindows.view(this, viewClass)
                 .open();
     }
@@ -57,7 +57,7 @@ public class ScriptView extends StandardView {
         sb.append("package dev.smartdata.runteam.view.scriptable\n");
         sb.append("import dev.smartdata.runteam.view.scriptable.ScriptableView\n");
         sb.append("import io.jmix.flowui.view.*\n");
-        sb.append("@ViewController(id = \"ext-view\")\n");
+        sb.append("@ViewController(id = \"scriptable-view-generated\")\n");
         sb.append("class ScriptableViewGenerated extends ScriptableView {\n");
         sb.append(controller.getValue()).append("\n");
         sb.append("}\n");
