@@ -5,7 +5,6 @@ import com.vaadin.flow.router.Route;
 import dev.smartdata.runteam.app.ViewRegistryTools;
 import groovy.lang.GroovyClassLoader;
 import io.jmix.core.Resources;
-import io.jmix.core.security.CurrentAuthentication;
 import io.jmix.flowui.DialogWindows;
 import io.jmix.flowui.component.codeeditor.CodeEditor;
 import io.jmix.flowui.kit.action.ActionPerformedEvent;
