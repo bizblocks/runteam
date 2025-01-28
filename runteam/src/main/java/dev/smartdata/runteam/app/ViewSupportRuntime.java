@@ -12,10 +12,12 @@ import io.jmix.flowui.view.navigation.ViewNavigationSupport;
 import io.micrometer.core.instrument.MeterRegistry;
 import org.dom4j.Element;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
+@Primary
 @Component("rt_ViewSupport")
 public class ViewSupportRuntime extends ViewSupport {
     public ViewSupportRuntime(ApplicationContext applicationContext, ViewXmlLoader viewXmlLoader, ViewRegistry viewRegistry, ViewNavigationSupport navigationSupport, CurrentAuthentication currentAuthentication, AutowireManager autowireManager, RouteSupport routeSupport, MeterRegistry meterRegistry) {
@@ -27,6 +29,8 @@ public class ViewSupportRuntime extends ViewSupport {
         Optional<String> templatePath = viewInfo.getTemplatePath();
         ViewXmlParser parser = new ViewXmlParser();
 
-        return templatePath.map(s -> parser.parseDescriptor(s).getDocument().getRootElement()).orElse(null);
+        return templatePath.map(s -> s.contains("<?xml version=\"1.0\" encoding=\"UTF-8\"?>")?
+                parser.parseDescriptor(s).getDocument().getRootElement() :
+                viewXmlLoader.load(s)).orElse(null);
     }
 }
