@@ -30,16 +30,18 @@ public class ScriptView extends StandardView {
 
     @Subscribe
     public void onReady(final ReadyEvent event) {
-        descriptor.setValue("<view xmlns=\"http://jmix.io/schema/flowui/view\"\n" +
-                "      title=\"Пример\">\n" +
-                "    <layout>\n" +
-                "        <nativeLabel text=\"Лабел!!\"/>\n" +
-                "    </layout>\n" +
-                "</view>");
-        controller.setValue("@Override\n" +
-                "void onInit(InitEvent event) {\n" +
-                "    showNotification()\n" +
-                "}");
+        descriptor.setValue("""
+                <view xmlns="http://jmix.io/schema/flowui/view"
+                      title="Пример">
+                    <layout>
+                        <nativeLabel text="Лабел!!"/>
+                    </layout>
+                </view>""");
+        controller.setValue("""
+                @Override
+                void onInit(InitEvent event) {
+                    showNotification()
+                }""");
         currentAuthentication.getUser();
     }
 
