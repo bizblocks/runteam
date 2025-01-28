@@ -11,12 +11,12 @@ import io.jmix.flowui.kit.action.ActionPerformedEvent;
 import io.jmix.flowui.view.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import static dev.smartdata.runteam.app.ViewSupportRuntime.XML_HEADER;
+
 @Route(value = "script-view", layout = DefaultMainViewParent.class)
 @ViewController(id = "rt_ScriptView")
 @ViewDescriptor(path = "script-view.xml")
 public class ScriptView extends StandardView {
-    protected static final String XML_HEADER = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
-
     @Autowired
     protected DialogWindows dialogWindows;
     @Autowired
@@ -43,6 +43,7 @@ public class ScriptView extends StandardView {
         currentAuthentication.getUser();
     }
 
+    @SuppressWarnings({"rawtypes", "resource", "unchecked"})
     @Subscribe("run")
     public void onRun(final ActionPerformedEvent event) {
         GroovyClassLoader loader = new GroovyClassLoader();

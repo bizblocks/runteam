@@ -19,6 +19,7 @@ public class ScriptableView extends StandardView {
     public void onInit(final InitEvent event) {
     }
 
+    @SuppressWarnings("unused")
     protected void showNotification() {
         notifications.create("Ура!").show();
     }

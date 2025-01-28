@@ -17,9 +17,13 @@ import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
+@SuppressWarnings("JmixInternalElementUsage")
 @Primary
 @Component("rt_ViewSupport")
 public class ViewSupportRuntime extends ViewSupport {
+    public static final String XML_HEADER = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
+
+
     public ViewSupportRuntime(ApplicationContext applicationContext, ViewXmlLoader viewXmlLoader, ViewRegistry viewRegistry, ViewNavigationSupport navigationSupport, CurrentAuthentication currentAuthentication, AutowireManager autowireManager, RouteSupport routeSupport, MeterRegistry meterRegistry) {
         super(applicationContext, viewXmlLoader, viewRegistry, navigationSupport, currentAuthentication, autowireManager, routeSupport, meterRegistry);
     }
@@ -29,7 +33,7 @@ public class ViewSupportRuntime extends ViewSupport {
         Optional<String> templatePath = viewInfo.getTemplatePath();
         ViewXmlParser parser = new ViewXmlParser();
 
-        return templatePath.map(s -> s.contains("<?xml version=\"1.0\" encoding=\"UTF-8\"?>")?
+        return templatePath.map(s -> s.contains(XML_HEADER)?
                 parser.parseDescriptor(s).getDocument().getRootElement() :
                 viewXmlLoader.load(s)).orElse(null);
     }
