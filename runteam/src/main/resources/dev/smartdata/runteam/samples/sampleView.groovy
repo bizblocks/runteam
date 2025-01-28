@@ -1,4 +1,4 @@
 @Override
-def onInit(event) {
+void onInit(InitEvent event) {
     super.onInit(event)
 }

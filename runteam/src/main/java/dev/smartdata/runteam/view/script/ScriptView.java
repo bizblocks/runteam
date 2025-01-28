@@ -4,6 +4,7 @@ package dev.smartdata.runteam.view.script;
 import com.vaadin.flow.router.Route;
 import dev.smartdata.runteam.app.ViewRegistryTools;
 import groovy.lang.GroovyClassLoader;
+import io.jmix.core.Resources;
 import io.jmix.core.security.CurrentAuthentication;
 import io.jmix.flowui.DialogWindows;
 import io.jmix.flowui.component.codeeditor.CodeEditor;
@@ -11,7 +12,7 @@ import io.jmix.flowui.kit.action.ActionPerformedEvent;
 import io.jmix.flowui.view.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static dev.smartdata.runteam.app.ViewSupportRuntime.XML_HEADER;
+import static dev.smartdata.runteam.app.ViewSupportRunteam.XML_HEADER;
 
 @Route(value = "script-view", layout = DefaultMainViewParent.class)
 @ViewController(id = "rt_ScriptView")
@@ -22,27 +23,16 @@ public class ScriptView extends StandardView {
     @Autowired
     protected ViewRegistryTools viewRegistryTools;
     @ViewComponent
-    private CodeEditor controller;
+    protected CodeEditor controller;
     @ViewComponent
-    private CodeEditor descriptor;
+    protected CodeEditor descriptor;
     @Autowired
-    private CurrentAuthentication currentAuthentication;
+    protected Resources resources;
 
     @Subscribe
     public void onReady(final ReadyEvent event) {
-        descriptor.setValue("""
-                <view xmlns="http://jmix.io/schema/flowui/view"
-                      title="Пример">
-                    <layout>
-                        <nativeLabel text="Лабел!!"/>
-                    </layout>
-                </view>""");
-        controller.setValue("""
-                @Override
-                void onInit(InitEvent event) {
-                    showNotification()
-                }""");
-        currentAuthentication.getUser();
+        descriptor.setValue(resources.getResourceAsString("dev/smartdata/runteam/samples/sampleView.xml"));
+        controller.setValue(resources.getResourceAsString("dev/smartdata/runteam/samples/sampleView.groovy"));
     }
 
     @SuppressWarnings({"rawtypes", "resource", "unchecked"})
@@ -69,7 +59,7 @@ public class ScriptView extends StandardView {
 
     protected String generateDescriptor() {
         StringBuilder sb = new StringBuilder(descriptor.getValue());
-        if(!sb.toString().contains(XML_HEADER))
+        if (!sb.toString().contains(XML_HEADER))
             sb.insert(0, XML_HEADER);
         return sb.toString();
     }

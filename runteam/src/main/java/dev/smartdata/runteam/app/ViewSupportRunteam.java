@@ -20,11 +20,11 @@ import java.util.Optional;
 @SuppressWarnings("JmixInternalElementUsage")
 @Primary
 @Component("rt_ViewSupport")
-public class ViewSupportRuntime extends ViewSupport {
+public class ViewSupportRunteam extends ViewSupport {
     public static final String XML_HEADER = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
 
 
-    public ViewSupportRuntime(ApplicationContext applicationContext, ViewXmlLoader viewXmlLoader, ViewRegistry viewRegistry, ViewNavigationSupport navigationSupport, CurrentAuthentication currentAuthentication, AutowireManager autowireManager, RouteSupport routeSupport, MeterRegistry meterRegistry) {
+    public ViewSupportRunteam(ApplicationContext applicationContext, ViewXmlLoader viewXmlLoader, ViewRegistry viewRegistry, ViewNavigationSupport navigationSupport, CurrentAuthentication currentAuthentication, AutowireManager autowireManager, RouteSupport routeSupport, MeterRegistry meterRegistry) {
         super(applicationContext, viewXmlLoader, viewRegistry, navigationSupport, currentAuthentication, autowireManager, routeSupport, meterRegistry);
     }
 
