@@ -8,7 +8,7 @@ buildscript {
 }
 
 group = 'dev.smartdata'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.2-SNAPSHOT'
 
 subprojects {
     apply plugin: 'java-library'
@@ -64,7 +64,7 @@ subprojects {
 
     // remove after https://youtrack.jetbrains.com/issue/IDEA-227215 is fixed
     tasks.withType(GenerateModuleMetadata) {
-        enabled = false
+        enabled = true
     }
 
     project.tasks.withType(JavaCompile).configureEach {

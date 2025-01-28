@@ -6,6 +6,7 @@ import io.jmix.eclipselink.EclipselinkConfiguration;
 import io.jmix.flowui.FlowuiConfiguration;
 import io.jmix.flowui.sys.ActionsConfiguration;
 import io.jmix.flowui.sys.ViewControllersConfiguration;
+import io.jmix.flowui.sys.ViewSupport;
 import io.jmix.gridexportflowui.GridExportFlowuiConfiguration;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.context.ApplicationContext;
@@ -39,5 +40,10 @@ public class RtConfiguration {
                 = new ActionsConfiguration(applicationContext, metadataReaderFactory);
         actions.setBasePackages(Collections.singletonList("dev.smartdata.runteam"));
         return actions;
+    }
+
+    @Bean("flowui_ViewSupport")
+    public ViewSupport viewSupport(final ApplicationContext applicationContext) {
+        return (ViewSupport) applicationContext.getBean("rt_ViewSupport");
     }
 }

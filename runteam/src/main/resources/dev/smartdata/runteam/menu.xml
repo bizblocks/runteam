@@ -4,6 +4,7 @@
     <menu id="rt" title="msg://dev.smartdata.runteam/menu.addon">
         <item view="rt_RunGroovy" title="msg://dev.smartdata.runteam.view.rungroovy/runGroovy.title"/>
         <item view="rt_RunJpql" title="msg://dev.smartdata.runteam.view.runjpql/runJpql.title"/>
+        <item view="rt_ScriptView" title="msg://dev.smartdata.runteam.view.script/scriptView.title"/>
     </menu>
 
 </menu-config>
