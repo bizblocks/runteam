@@ -6,10 +6,11 @@
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd"
         objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
     <changeSet id="1" author="rt">
-        <createTable tableName="RT_RT_GROOVY_SCRIPT">
+        <createTable tableName="RT_SCRIPT">
             <column name="ID" type="UUID">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_RT_RT_GROOVY_SCRIPT"/>
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_RT_SCRIPT"/>
             </column>
+            <column name="DTYPE" type="VARCHAR(31)"/>
             <column name="NAME" type="VARCHAR(255)"/>
             <column name="SCRIPT" type="CLOB"/>
             <column name="DESCRIPTION" type="VARCHAR(1024)"/>

@@ -6,7 +6,7 @@ import io.jmix.flowui.view.*;
 
 @Route(value = "rTGroovyScripts/:id", layout = DefaultMainViewParent.class)
 @ViewController(id = "rt_RTGroovyScript.detail")
-@ViewDescriptor(path = "rt-groovy-script-detail-view.xml")
+@ViewDescriptor(path = "groovy-script-detail-view.xml")
 @EditedEntityContainer("rTGroovyScriptDc")
 public class RTGroovyScriptDetailView extends StandardDetailView<RTGroovyScript> {
 }

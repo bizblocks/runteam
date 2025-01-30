@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <view xmlns="http://jmix.io/schema/flowui/view"
       title="Пример">
+    <actions>
+        <action id="close" type="view_close"/>
+    </actions>
     <layout>
         <nativeLabel text="Лабел!!"/>
+        <button action="close"/>
     </layout>
 </view>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<fragment xmlns="http://jmix.io/schema/flowui/fragment">
+    <data>
+        <collection id="rtScriptsDc" provided="true">
+            <loader id="rtScriptsDl" provided="true"/>
+        </collection>
+    </data>
+    <actions>
+        <action id="newScript" icon="lumo:plus"/>
+        <action id="removeScript" icon="lumo:minus"/>
+        <action id="saveScript" icon="lumo:download"/>
+        <action id="loadScript" icon="lumo:upload"/>
+        <action id="editScript" icon="lumo:edit"/>
+    </actions>
+    <content>
+        <vbox id="root">
+            <hbox>
+                <entityComboBox itemsContainer="rtScriptsDc" id="rtScript" metaClass="rt_RTScript"/>
+                <button action="newScript"/>
+                <button action="removeScript"/>
+                <button action="saveScript"/>
+                <button action="loadScript"/>
+                <button action="editScript"/>
+            </hbox>
+            <nativeLabel id="scriptDescription" dataContainer="rtScriptsDc" property="description"/>
+        </vbox>
+    </content>
+</fragment>

@@ -1,20 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <view xmlns="http://jmix.io/schema/flowui/view"
       title="msg://runJpql.title">
+    <data>
+        <collection id="rtScriptsDc" class="dev.smartdata.runteam.entity.RTJPQLScript" fetchPlan="_local">
+            <loader id="rtScriptsDl">
+                <query>
+                    <![CDATA[select e from rt_RTJPQLScript e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
     <actions>
         <action id="run" text="msg:///run"/>
     </actions>
     <layout>
-        <split width="100%" height="100%" orientation="VERTICAL">
-            <codeEditor id="code" width="100%" height="100%" mode="SQL"/>
+        <fragment id="scriptBox" class="dev.smartdata.runteam.view.scriptbox.ScriptBox"/>
+        <split width="100%" height="100%" orientation="VERTICAL" splitterPosition="30">
+            <codeEditor id="code" width="100%" height="100%" mode="SQL" dataContainer="rtScriptsDc" property="script"/>
             <vbox height="100%" width="100%">
                 <hbox>
                     <button action="run"/>
                     <hbox id="tableButtons" visible="false">
-                        <button action="result.export"/>
+                        <button id="btnExport" action="result.export"/>
                     </hbox>
                 </hbox>
                 <dataGrid id="result" width="100%" height="100%" metaClass="sys_KeyValueEntity">
+                    <actions>
+                        <action id="export" type="grdexp_excelExport"/>
+                    </actions>
+                </dataGrid>
+                <dataGrid id="entityResult" width="100%" height="100%" metaClass="data_ReferenceToEntity" visible="false">
                     <actions>
                         <action id="export" type="grdexp_excelExport"/>
                     </actions>
