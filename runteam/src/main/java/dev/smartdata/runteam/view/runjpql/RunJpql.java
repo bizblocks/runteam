@@ -105,16 +105,18 @@ public class RunJpql extends RTScriptView {
         btnExport.setAction(entityResult.getAction("export"));
         result.setVisible(false);
         entityResult.setVisible(true);
-        CollectionContainer container = dataComponents.createCollectionContainer(properties.getFirst());
+        CollectionContainer container = dataComponents.createCollectionContainer(properties.get(0));
         CollectionLoader loader = dataComponents.createCollectionLoader();
         loader.setQuery(queryString);
         loader.setContainer(container);
         loader.setDataContext(getViewData().getDataContext());
         loader.load();
-        for(MetaProperty property: metadata.getClass(properties.getFirst()).getProperties()) {
-            if(property.getAnnotatedElement().isAnnotationPresent(SystemLevel.class))
+        if (properties.isEmpty())
+            return;
+        for (MetaProperty property : metadata.getClass(properties.get(0)).getProperties()) {
+            if (property.getAnnotatedElement().isAnnotationPresent(SystemLevel.class))
                 continue;
-            entityResult.addColumn(metadata.getClass(properties.getFirst()).getPropertyPath(property.getName()));
+            entityResult.addColumn(metadata.getClass(properties.get(0)).getPropertyPath(property.getName()));
         }
         entityResult.setItems(new ContainerDataGridItems<>(container));
     }
