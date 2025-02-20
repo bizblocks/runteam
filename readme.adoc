@@ -1,9 +1,9 @@
-RunTeam Add-On
+= RunTeam Add-on
+
 - Исполнение Groovy-скриптов
 - Исполнение jpql-запросов
-- Внешние экраны
+- Скриптуемые экраны
 
-= RunTeam Add-on
 
 = RunTeam Add-on for Jmix
 
