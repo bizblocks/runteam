@@ -7,7 +7,6 @@ import io.jmix.core.DataManager;
 import io.jmix.core.Messages;
 import io.jmix.flowui.DialogWindows;
 import io.jmix.flowui.Dialogs;
-import io.jmix.flowui.Notifications;
 import io.jmix.flowui.action.DialogAction;
 import io.jmix.flowui.component.codeeditor.CodeEditor;
 import io.jmix.flowui.component.combobox.EntityComboBox;
@@ -17,7 +16,6 @@ import io.jmix.flowui.kit.action.BaseAction;
 import io.jmix.flowui.model.CollectionLoader;
 import io.jmix.flowui.view.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.scripting.ScriptCompilationException;
 import org.springframework.scripting.groovy.GroovyScriptEvaluator;
 import org.springframework.scripting.support.StaticScriptSource;
@@ -33,8 +31,6 @@ public class RunGroovy extends StandardView {
     @ViewComponent
     protected JmixTextArea result;
     @Autowired
-    protected Notifications notifications;
-    @Autowired
     protected Messages messages;
     @Autowired
     protected Dialogs dialogs;
@@ -48,8 +44,6 @@ public class RunGroovy extends StandardView {
     protected BaseAction newScript;
     @ViewComponent
     protected CollectionLoader<RTGroovyScript> rtGroovyScriptsDl;
-    @Autowired
-    protected StringHttpMessageConverter stringHttpMessageConverter;
 
     @Subscribe("run")
     public void onRun(final ActionPerformedEvent event) {
