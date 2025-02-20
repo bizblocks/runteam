@@ -17,6 +17,8 @@ import io.jmix.flowui.kit.action.BaseAction;
 import io.jmix.flowui.model.CollectionLoader;
 import io.jmix.flowui.view.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.scripting.ScriptCompilationException;
 import org.springframework.scripting.groovy.GroovyScriptEvaluator;
 import org.springframework.scripting.support.StaticScriptSource;
 
@@ -27,34 +29,39 @@ public class RunGroovy extends StandardView {
 
     protected GroovyScriptEvaluator engine;
     @ViewComponent
-    private CodeEditor code;
+    protected CodeEditor code;
     @ViewComponent
-    private JmixTextArea result;
+    protected JmixTextArea result;
     @Autowired
-    private Notifications notifications;
+    protected Notifications notifications;
     @Autowired
-    private Messages messages;
+    protected Messages messages;
     @Autowired
-    private Dialogs dialogs;
+    protected Dialogs dialogs;
     @ViewComponent
-    private EntityComboBox<RTGroovyScript> rtGroovyScript;
+    protected EntityComboBox<RTGroovyScript> rtGroovyScript;
     @Autowired
-    private DataManager dataManager;
+    protected DataManager dataManager;
     @Autowired
-    private DialogWindows dialogWindows;
+    protected DialogWindows dialogWindows;
     @ViewComponent
-    private BaseAction newScript;
+    protected BaseAction newScript;
     @ViewComponent
-    private CollectionLoader<RTGroovyScript> rtGroovyScriptsDl;
+    protected CollectionLoader<RTGroovyScript> rtGroovyScriptsDl;
+    @Autowired
+    protected StringHttpMessageConverter stringHttpMessageConverter;
 
     @Subscribe("run")
     public void onRun(final ActionPerformedEvent event) {
         result.clear();
         try {
-            String res = engine.evaluate(new StaticScriptSource(code.getValue())).toString();
-            result.setValue(res);
-        } catch (Exception e) {
-            result.setValue(e.toString());
+            Object res = engine.evaluate(new StaticScriptSource(code.getValue()));
+            String str = "null";
+            if (res != null)
+                str = res.toString();
+            result.setValue(str);
+        } catch (ScriptCompilationException e) {
+            result.setValue(e.getCause().toString());
         }
 
     }
@@ -114,7 +121,7 @@ public class RunGroovy extends StandardView {
 
     @Subscribe("loadScript")
     public void onLoadScript(final ActionPerformedEvent event) {
-        if(rtGroovyScript.getValue() == null)
+        if (rtGroovyScript.getValue() == null)
             return;
         result.clear();
         code.setValue(rtGroovyScript.getValue().getScript());
@@ -122,7 +129,7 @@ public class RunGroovy extends StandardView {
 
     @Subscribe("editScript")
     public void onEditScript(final ActionPerformedEvent event) {
-        if(rtGroovyScript.getValue() == null)
+        if (rtGroovyScript.getValue() == null)
             return;
         dialogWindows.detail(rtGroovyScript)
                 .withAfterCloseListener(closeEvent -> rtGroovyScriptsDl.load())
