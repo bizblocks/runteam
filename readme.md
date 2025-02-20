@@ -67,19 +67,7 @@ Scriptable screens allow you to define custom UI components and logic using Groo
 
 == Configuration
 
-By default, the RunTeam add-on is configured to work out-of-the-box. However, advanced users may customize its behavior by modifying the following properties in the `application.properties` file:
-
-[source,properties]
-----
-# Enable/disable the console interface
-runteam.console.enabled=true
-
-# Define allowed IP addresses (comma-separated list)
-runteam.security.allowed-ips=127.0.0.1
-
-# Set maximum execution time for scripts (in milliseconds)
-runteam.execution.timeout=30000
-----
+By default, the RunTeam add-on is configured to work out-of-the-box.
 
 == Security Considerations
 
