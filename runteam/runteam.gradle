@@ -23,5 +23,5 @@ configurations.implementation {
 }
 
 test {
-    useJUnitPlatform()
+    //useJUnitPlatform()
 }
