@@ -29,7 +29,7 @@
                         <action id="export" type="grdexp_excelExport"/>
                     </actions>
                 </dataGrid>
-                <dataGrid id="entityResult" width="100%" height="100%" metaClass="data_ReferenceToEntity" visible="false">
+                <dataGrid id="entityResult" width="100%" height="100%" visible="false" metaClass="rt_Dummy">
                     <actions>
                         <action id="export" type="grdexp_excelExport"/>
                     </actions>

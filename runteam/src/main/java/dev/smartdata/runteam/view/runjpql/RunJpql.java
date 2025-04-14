@@ -14,7 +14,6 @@ import io.jmix.core.Metadata;
 import io.jmix.core.entity.KeyValueEntity;
 import io.jmix.core.entity.annotation.SystemLevel;
 import io.jmix.core.metamodel.model.MetaProperty;
-import io.jmix.data.entity.ReferenceToEntity;
 import io.jmix.flowui.component.codeeditor.CodeEditor;
 import io.jmix.flowui.component.grid.DataGrid;
 import io.jmix.flowui.component.textarea.JmixTextArea;
@@ -48,7 +47,7 @@ public class RunJpql extends RTScriptView {
     @ViewComponent
     private DataGrid<KeyValueEntity> result;
     @ViewComponent
-    private DataGrid<ReferenceToEntity> entityResult;
+    private DataGrid entityResult;
     @Autowired
     private Metadata metadata;
     @ViewComponent
@@ -61,6 +60,7 @@ public class RunJpql extends RTScriptView {
             result.setVisible(true);
             generateTable(queryString);
         } catch (Exception e) {
+            entityResult.setVisible(false);
             result.setVisible(false);
             textResult.setValue(e.toString());
         }
