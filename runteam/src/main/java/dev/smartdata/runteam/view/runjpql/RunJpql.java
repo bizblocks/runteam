@@ -74,6 +74,7 @@ public class RunJpql extends RTScriptView {
         if (properties.isEmpty())
             throw new Exception("No results");
         result.removeAllColumns();
+        entityResult.removeAllColumns();
 
         if (properties.size() == 1 && (Entity.class.isAssignableFrom(properties.get(0)))) {
             setupEntityResult(queryString, properties);
@@ -105,6 +106,7 @@ public class RunJpql extends RTScriptView {
         btnExport.setAction(entityResult.getAction("export"));
         result.setVisible(false);
         entityResult.setVisible(true);
+        entityResult.removeAllColumns();
         CollectionContainer container = dataComponents.createCollectionContainer(properties.get(0));
         CollectionLoader loader = dataComponents.createCollectionLoader();
         loader.setQuery(queryString);
