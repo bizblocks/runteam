@@ -1,4 +1,4 @@
-rootProject.name = 'RunTeam-addon'
+rootProject.name = 'runteam-addon'
 
 include 'runteam'
 include 'runteam-starter'

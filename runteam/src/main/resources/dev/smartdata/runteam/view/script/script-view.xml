@@ -9,12 +9,12 @@
             <tab id="controllerTab" label="Controller">
                 <vbox width="100%" height="100%">
                     <nativeLabel text="class ScriptableViewGenerated extends ScriptableView {"/>
-                    <codeEditor id="controller" width="100%" height="100%" mode="GROOVY"/>
+                    <codeEditor id="controller" width="100%" height="100%" mode="GROOVY" liveSuggestionsEnabled="true"/>
                     <nativeLabel text="}"/>
                 </vbox>
             </tab>
             <tab id="descriptorTab" label="Descriptor">
-                <codeEditor id="descriptor" height="100%" width="100%" mode="XML" />
+                <codeEditor id="descriptor" height="100%" width="100%" mode="XML" liveSuggestionsEnabled="true"/>
             </tab>
         </tabSheet>
         <button action="run"/>

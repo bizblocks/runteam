@@ -17,6 +17,7 @@ import io.jmix.flowui.component.combobox.EntityComboBox;
 import io.jmix.flowui.fragment.Fragment;
 import io.jmix.flowui.fragment.FragmentDescriptor;
 import io.jmix.flowui.kit.action.ActionPerformedEvent;
+import io.jmix.flowui.kit.action.BaseAction;
 import io.jmix.flowui.model.CollectionContainer;
 import io.jmix.flowui.model.CollectionLoader;
 import io.jmix.flowui.view.*;
@@ -40,6 +41,8 @@ public class ScriptBox extends Fragment<VerticalLayout> {
     private Notifications notifications;
     @ViewComponent
     private CollectionLoader<? extends RTScript> rtScriptsDl;
+    @ViewComponent
+    private BaseAction saveScript;
 
     @Subscribe(target = Target.HOST_CONTROLLER)
     public void onHostInit(final View.InitEvent event) {
@@ -70,17 +73,25 @@ public class ScriptBox extends Fragment<VerticalLayout> {
     public void onSaveScript(final ActionPerformedEvent event) {
         RTScript script;
         if (rtScript.getValue() != null) {
-            script = (RTScript) rtScript.getValue();
-            dataManager.save(script);
+            script = rtScriptsDc.getItem();
+            rtScript.setValue(dataManager.save(script));
             fireEvent(new SaveEvent(this, true));
         } else {
             dialogWindows.detail((View<?>) getParentController(), rtScriptsDc.getEntityMetaClass().getJavaClass())
                     .newEntity()
-                    .withField(rtScript)
-                    .withInitializer(newScript -> initializeRTScript((RTScript) newScript))
+                    .withInitializer(newScript -> {
+                        initializeRTScript((RTScript) newScript);
+                        rtScript.setValue(newScript);
+                    })
                     .withAfterCloseListener(closeEvent -> {
                         getFragmentData().loadAll();
                         fireEvent(new SaveEvent(this, true));
+                        if(closeEvent.closedWith(StandardOutcome.SAVE)) {
+                            RTScript saveScript = rtScriptsDc.getItem();
+                            rtScriptsDl.load();
+                            rtScript.setValue(rtScript.getEmptyValue());
+                            rtScript.setValue(saveScript);
+                        }
                     })
                     .open();
         }

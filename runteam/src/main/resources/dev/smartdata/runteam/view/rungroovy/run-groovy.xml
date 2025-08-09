@@ -2,8 +2,8 @@
 <view xmlns="http://jmix.io/schema/flowui/view"
       title="msg://runGroovy.title">
     <data>
-        <collection id="rtGroovyScriptsDc" class="dev.smartdata.runteam.entity.RTGroovyScript" fetchPlan="_local">
-            <loader id="rtGroovyScriptsDl">
+        <collection id="rtScriptsDc" class="dev.smartdata.runteam.entity.RTGroovyScript" fetchPlan="_local">
+            <loader id="rtScriptsDl">
                 <query>
                     <![CDATA[select e from rt_RTGroovyScript e]]>
                 </query>
@@ -15,24 +15,12 @@
     </facets>
     <actions>
         <action id="run" text="msg:///run"/>
-        <action id="newScript" icon="lumo:plus"/>
-        <action id="removeScript" icon="lumo:minus"/>
-        <action id="saveScript" icon="lumo:download"/>
-        <action id="loadScript" icon="lumo:upload"/>
-        <action id="editScript" icon="lumo:edit"/>
     </actions>
     <layout>
-        <hbox>
-            <entityComboBox itemsContainer="rtGroovyScriptsDc" id="rtGroovyScript" metaClass="rt_RTGroovyScript"/>
-            <button action="newScript"/>
-            <button action="removeScript"/>
-            <button action="saveScript"/>
-            <button action="loadScript"/>
-            <button action="editScript"/>
-        </hbox>
-        <nativeLabel id="scriptDescription" dataContainer="rtGroovyScriptsDc" property="description"/>
+        <fragment id="scriptBox" class="dev.smartdata.runteam.view.scriptbox.ScriptBox"/>
         <split width="100%" height="100%" orientation="VERTICAL">
-            <codeEditor id="code" mode="GROOVY" width="100%" height="100%" dataContainer="rtGroovyScriptsDc" property="script"/>
+            <codeEditor id="code" mode="GROOVY" width="100%" height="100%" dataContainer="rtScriptsDc" property="script"
+                        liveSuggestionsEnabled="true"/>
             <vbox width="100%" height="100%">
                 <button id="btnRun" action="run"/>
                 <textArea id="result" width="100%" height="100%" readOnly="true"/>

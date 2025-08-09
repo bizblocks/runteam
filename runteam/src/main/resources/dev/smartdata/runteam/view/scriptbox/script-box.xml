@@ -8,8 +8,8 @@
     <actions>
         <action id="newScript" icon="lumo:plus"/>
         <action id="removeScript" icon="lumo:minus"/>
-        <action id="saveScript" icon="lumo:download"/>
-        <action id="loadScript" icon="lumo:upload"/>
+        <action id="saveScript" icon="vaadin:safe"/>
+        <action id="loadScript" icon="vaadin:upload"/>
         <action id="editScript" icon="lumo:edit"/>
     </actions>
     <content>

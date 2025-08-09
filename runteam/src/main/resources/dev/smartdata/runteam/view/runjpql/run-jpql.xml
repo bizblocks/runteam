@@ -16,7 +16,8 @@
     <layout>
         <fragment id="scriptBox" class="dev.smartdata.runteam.view.scriptbox.ScriptBox"/>
         <split width="100%" height="100%" orientation="VERTICAL" splitterPosition="30">
-            <codeEditor id="code" width="100%" height="100%" mode="SQL" dataContainer="rtScriptsDc" property="script"/>
+            <codeEditor id="code" width="100%" height="100%" mode="SQL" dataContainer="rtScriptsDc" property="script"
+                        liveSuggestionsEnabled="true"/>
             <vbox height="100%" width="100%">
                 <hbox>
                     <button action="run"/>
