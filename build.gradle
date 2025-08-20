@@ -48,8 +48,16 @@ subprojects {
                 name = "GitHubPackages"
                 url = uri("https://maven.pkg.github.com/bizblocks/runteam")
                 credentials {
-                    username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_USERNAME")
-                    password = project.findProperty("gpr.key") ?: System.getenv("GITHUB_TOKEN")
+                    username = rootProject['githubUser'] ?: System.getenv("GITHUB_USERNAME")
+                    password = rootProject['githubToken'] ?: System.getenv("GITHUB_TOKEN")
+                }
+            }
+                maven {
+                name = "SmartDataGitlab"
+                url = uri("https://git.smartdata.dev/api/v4/projects/418/packages/maven")
+                credentials {
+                    username = rootProject['gitlabUser']
+                    password = rootProject['gitlabToken']
                 }
             }
         }

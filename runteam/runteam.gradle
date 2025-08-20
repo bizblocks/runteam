@@ -1,3 +1,4 @@
+group = 'dev.smartdata'
 archivesBaseName = 'runteam'
 
 dependencies {

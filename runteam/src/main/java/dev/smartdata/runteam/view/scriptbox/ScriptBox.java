@@ -88,9 +88,9 @@ public class ScriptBox extends Fragment<VerticalLayout> {
                         fireEvent(new SaveEvent(this, true));
                         if(closeEvent.closedWith(StandardOutcome.SAVE)) {
                             RTScript saveScript = rtScriptsDc.getItem();
-                            rtScriptsDl.load();
                             rtScript.setValue(rtScript.getEmptyValue());
                             rtScript.setValue(saveScript);
+                            rtScriptsDl.load();
                         }
                     })
                     .open();

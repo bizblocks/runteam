@@ -1,3 +1,4 @@
+group = 'dev.smartdata'
 archivesBaseName = 'runteam-starter'
 
 jmix {
@@ -8,9 +9,6 @@ jmix {
 
 dependencies {
     api project(':runteam')
-
-    implementation 'io.jmix.core:jmix-core'
-    implementation 'io.jmix.data:jmix-data'
 
     implementation 'org.springframework.boot:spring-boot-autoconfigure'
 }

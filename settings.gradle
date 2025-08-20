@@ -1,8 +1,17 @@
 rootProject.name = 'runteam-addon'
 
-include 'runteam'
-include 'runteam-starter'
+includeProject('runteam', 'runteam')
+includeProject('runteam-starter', 'runteam-starter')
 
 rootProject.children.each { p1 ->
     p1.buildFileName = "${p1.name}.gradle"
+}
+
+void includeProject(String name, String path, boolean changeBuildFileName = true) {
+    include ":$name"
+    project(":$name").projectDir = new File(settingsDir, "$path")
+
+    if (changeBuildFileName) {
+        project(":$name").buildFileName = "${name}.gradle"
+    }
 }
