@@ -15,6 +15,10 @@ import org.springframework.scripting.ScriptCompilationException;
 import org.springframework.scripting.groovy.GroovyScriptEvaluator;
 import org.springframework.scripting.support.StaticScriptSource;
 
+import java.io.StringWriter;
+import java.util.HashMap;
+import java.util.Map;
+
 @Route(value = "run-groovy", layout = DefaultMainViewParent.class)
 @ViewController(id = "rt_RunGroovy")
 @ViewDescriptor(path = "run-groovy.xml")
@@ -27,16 +31,23 @@ public class RunGroovy extends RTScriptView {
     protected JmixTextArea result;
     @ViewComponent
     protected CollectionLoader<RTGroovyScript> rtScriptsDl;
+    @ViewComponent
+    private JmixTextArea console;
 
     @Subscribe("run")
     public void onRun(final ActionPerformedEvent event) {
         result.clear();
         try {
-            Object res = engine.evaluate(new StaticScriptSource(code.getValue()));
+            StringWriter console = new StringWriter();
+            Map<String, Object> binding = new HashMap<>();
+            binding.put("out", console);
+
+            Object res = engine.evaluate(new StaticScriptSource(code.getValue()), binding);
             String str = "null";
             if (res != null)
                 str = res.toString();
             result.setValue(str);
+            this.console.setValue(console.toString());
         } catch (ScriptCompilationException e) {
             result.setValue(e.getCause().toString());
         }
@@ -50,39 +61,27 @@ public class RunGroovy extends RTScriptView {
 
     @Subscribe("scriptBox")
     protected void onScriptBoxClear(final ScriptBox.ClearEvent event) {
-        result.clear();
+        clearResult();
         code.setValue("return null");
+    }
+
+    private void clearResult() {
+        result.clear();
+        console.clear();
     }
 
     @Subscribe("scriptBox")
     protected void onScriptBoxLoad(final ScriptBox.LoadEvent event) {
-        result.clear();
+        clearResult();
         //FIXME:обход проблемы CodeEditor
         code.getElement().callJsFunction("_onValueChange", code.getValue());
     }
 
     @Subscribe("scriptBox")
     protected void onScriptBoxRemove(final ScriptBox.RemoveEvent event) {
-        result.clear();
+        clearResult();
         code.setValue("select o from _ o");
     }
-
-//    @Subscribe("saveScript")
-//    public void onSaveScript(final ActionPerformedEvent event) {
-//        RTGroovyScript script;
-//        if (rtGroovyScript.getValue() != null) {
-//            script = rtGroovyScript.getValue();
-//            dataManager.save(script);
-//        } else {
-//            dialogWindows.detail(this, RTGroovyScript.class)
-//                    .newEntity()
-//                    .withField(rtGroovyScript)
-//                    .withInitializer(newScript -> newScript.setScript(code.getValue()))
-//                    .withAfterCloseListener(closeEvent -> rtGroovyScriptsDl.load())
-//                    .open();
-//        }
-//    }
-
 
     @Override
     public void initNewItem(RTScript newScript) {

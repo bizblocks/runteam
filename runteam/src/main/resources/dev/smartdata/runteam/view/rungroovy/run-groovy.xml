@@ -23,7 +23,16 @@
                         liveSuggestionsEnabled="true"/>
             <vbox width="100%" height="100%">
                 <button id="btnRun" action="run"/>
-                <textArea id="result" width="100%" height="100%" readOnly="true"/>
+                <split splitterPosition="50" height="100%" width="100%">
+                    <vbox>
+                        <nativeLabel text="msg://result"/>
+                        <textArea id="result" width="100%" height="100%" readOnly="true"/>
+                    </vbox>
+                    <vbox>
+                    <nativeLabel text="msg://console"/>
+                        <textArea id="console" width="100%" height="100%" readOnly="true"/>
+                    </vbox>
+                </split>
             </vbox>
         </split>
     </layout>
