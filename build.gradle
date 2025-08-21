@@ -46,7 +46,7 @@ subprojects {
         repositories {
             maven {
                 name = "GitHubPackages"
-                url = uri("https://maven.pkg.github.com/bizblocks/runteam")
+                url = uri(System.getenv('GITHUB_REPOSITORY'))
                 credentials {
                     username = rootProject['githubUser'] ?: System.getenv("GITHUB_USERNAME")
                     password = rootProject['githubToken'] ?: System.getenv("GITHUB_TOKEN")
