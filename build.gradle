@@ -56,8 +56,8 @@ subprojects {
                 name = "SmartDataGitlab"
                 url = uri("https://git.smartdata.dev/api/v4/projects/418/packages/maven")
                 credentials {
-                    username = rootProject['gitlabUser']
-                    password = rootProject['gitlabToken']
+                    username = System.getenv("GITLAB_USER") ?: rootProject['gitlabUser']
+                    password = System.getenv("GITLAB_TOKEN") ?: rootProject['gitlabToken']
                 }
             }
         }

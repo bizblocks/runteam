@@ -16,3 +16,5 @@ jobs:
           GITHUB_REPOSITORY: ${{ github.repository }}
           GITHUB_USERNAME: ${{ github.repository_owner }}
           GITHUB_TOKEN: ${{ github.token }}
+          GITLAB_USER: ""
+          GITLAB_TOKEN: ""
