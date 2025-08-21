@@ -46,10 +46,10 @@ subprojects {
         repositories {
             maven {
                 name = "GitHubPackages"
-                url = uri(System.getenv('GITHUB_REPOSITORY'))
+                url = uri(System.getenv('GITHUB_REPOSITORY') ?: "https://maven.pkg.github.com/bizblocks/runteam")
                 credentials {
                     username = System.getenv("GITHUB_USERNAME") ?: rootProject['githubUser']
-                    password = System.getenv("GITHUB_TOKEN") ?: rootProject['githubToken'] ?:
+                    password = System.getenv("GITHUB_TOKEN") ?: rootProject['githubToken']
                 }
             }
             maven {
