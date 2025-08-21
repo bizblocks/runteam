@@ -48,11 +48,11 @@ subprojects {
                 name = "GitHubPackages"
                 url = uri(System.getenv('GITHUB_REPOSITORY'))
                 credentials {
-                    username = rootProject['githubUser'] ?: System.getenv("GITHUB_USERNAME")
-                    password = rootProject['githubToken'] ?: System.getenv("GITHUB_TOKEN")
+                    username = System.getenv("GITHUB_USERNAME") ?: rootProject['githubUser']
+                    password = System.getenv("GITHUB_TOKEN") ?: rootProject['githubToken'] ?:
                 }
             }
-                maven {
+            maven {
                 name = "SmartDataGitlab"
                 url = uri("https://git.smartdata.dev/api/v4/projects/418/packages/maven")
                 credentials {
