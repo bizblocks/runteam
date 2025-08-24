@@ -16,6 +16,7 @@ import io.jmix.core.entity.annotation.SystemLevel;
 import io.jmix.core.metamodel.model.MetaProperty;
 import io.jmix.flowui.component.codeeditor.CodeEditor;
 import io.jmix.flowui.component.grid.DataGrid;
+import io.jmix.flowui.component.grid.DataGridColumn;
 import io.jmix.flowui.component.textarea.JmixTextArea;
 import io.jmix.flowui.data.grid.ContainerDataGridItems;
 import io.jmix.flowui.kit.action.ActionPerformedEvent;
@@ -92,7 +93,8 @@ public class RunJpql extends RTScriptView {
         properties.forEach(p -> {
             String col = "" + columns.size();
             container.addProperty(col, p);
-            result.addColumn(col, Objects.requireNonNull(container.getEntityMetaClass().getPropertyPath(col)));
+            DataGridColumn<KeyValueEntity> column = result.addColumn(col, Objects.requireNonNull(container.getEntityMetaClass().getPropertyPath(col)));
+            column.setResizable(true);
             columns.add(col);
         });
         FluentValuesLoader loader = dataManager.loadValues(queryString)
@@ -118,7 +120,8 @@ public class RunJpql extends RTScriptView {
         for (MetaProperty property : metadata.getClass(properties.get(0)).getProperties()) {
             if (property.getAnnotatedElement().isAnnotationPresent(SystemLevel.class))
                 continue;
-            entityResult.addColumn(metadata.getClass(properties.get(0)).getPropertyPath(property.getName()));
+            DataGridColumn column =entityResult.addColumn(metadata.getClass(properties.get(0)).getPropertyPath(property.getName()));
+            column.setResizable(true);
         }
         entityResult.setItems(new ContainerDataGridItems<>(container));
     }
