@@ -8,8 +8,13 @@ import org.springframework.stereotype.Component;
 @Primary
 @Component("rt_ViewRegistryTools")
 public class ViewRegistryTools extends ViewRegistry {
+    public static final String SCRIPTABLE_VIEW_GENERATED = "scriptable-view-generated";
+
     @Override
     public void registerView(String id, ViewInfo viewInfo) {
-        views.put(id, viewInfo);
+        if (SCRIPTABLE_VIEW_GENERATED.equals(id))
+            views.put(id, viewInfo);
+        else
+            super.registerView(id, viewInfo);
     }
 }

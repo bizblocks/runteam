@@ -11,12 +11,14 @@ import io.jmix.flowui.kit.action.ActionPerformedEvent;
 import io.jmix.flowui.view.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import static dev.smartdata.runteam.app.ViewRegistryTools.SCRIPTABLE_VIEW_GENERATED;
 import static dev.smartdata.runteam.app.ViewSupportRunteam.XML_HEADER;
 
 @Route(value = "script-view", layout = DefaultMainViewParent.class)
 @ViewController(id = "rt_ScriptView")
 @ViewDescriptor(path = "script-view.xml")
 public class ScriptView extends StandardView {
+
     @Autowired
     protected DialogWindows dialogWindows;
     @Autowired
@@ -39,7 +41,7 @@ public class ScriptView extends StandardView {
     public void onRun(final ActionPerformedEvent event) {
         GroovyClassLoader loader = new GroovyClassLoader();
         Class viewClass = loader.parseClass(generateGroovyClass());
-        viewRegistryTools.registerView("scriptable-view-generated", new ViewInfo("scriptable-view-generated", viewClass.getName(), viewClass, generateDescriptor()));
+        viewRegistryTools.registerView("scriptable-view-generated", new ViewInfo(SCRIPTABLE_VIEW_GENERATED, viewClass.getName(), viewClass, generateDescriptor()));
         dialogWindows.view(this, viewClass)
                 .open();
     }
